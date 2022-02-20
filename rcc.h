@@ -264,7 +264,7 @@ struct zmcu_rcc {
 #define RCC_PLLI2SCFGR_PLLI2SM(x)		(1u << 0)
 
 	/* 0x88 */
-	uint32_t volatile RESERVED7;
+	uint8_t volatile RESERVED7[0x8C-0x88];
 
 	/* 0x8C: RCC Dedicated Clocks Configuration Register */
 	uint32_t volatile DCKCFGR;

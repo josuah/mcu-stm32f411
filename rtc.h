@@ -183,7 +183,7 @@ struct zmcu_rtc {
 #define RTC_ALRMBSSR_SS(x)			(1u << 0)
 
 	/* 0x4C */
-	uint32_t volatile RESERVED20;
+	uint8_t volatile RESERVED20[0x50-0x4C];
 
 	/* 0x50: RTC backup registers */
 	uint32_t volatile BKPR[20];

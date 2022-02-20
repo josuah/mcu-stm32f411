@@ -139,13 +139,13 @@ struct zmcu_tim {
 	uint32_t volatile ARR;
 
 	/* 0x30 */
-	uint32_t volatile RESERVED11;
+	uint8_t volatile RESERVED11[0x34-0x30];
 
 	/* 0x34: TIMx capture/compare register */
 	uint32_t volatile CCR[4];
 
 	/* 0x44 */
-	uint32_t volatile RESERVED12;
+	uint8_t volatile RESERVED12[0x48-0x44];
 
 	/* 0x48: TIMx DMA control register */
 	uint32_t volatile DCR;
