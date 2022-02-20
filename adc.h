@@ -58,7 +58,7 @@ struct zmcu_adc {
 #define ADC_JOFRx_JOFFSETx(x)			(1u << 0)
 
 	/* 0x18 */
-	uint32_t volatile RESERVED9[(0x24-0x18)/4];
+	uint8_t volatile RESERVED9[0x24-0x18];
 
 	/* 0x24: ADC watchdog higher threshold register */
 	uint32_t volatile HTR;
@@ -100,7 +100,7 @@ struct zmcu_adc {
 	uint32_t volatile JDRx;
 
 	/* 0x40 */
-	uint32_t volatile RESERVED10[(0x4C-0x40)/4];
+	uint8_t volatile RESERVED10[0x4C-0x40];
 
 	/* 0x4C: ADC regular data register */
 	uint32_t volatile DR;

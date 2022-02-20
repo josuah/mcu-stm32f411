@@ -139,14 +139,14 @@ struct zmcu_sdio {
 #define SDIO_MASK_CCRCFAILIE			(1u << 0)
 
 	/* 0x40 */
-	uint32_t volatile RESERVED22[(0x48-0x40)/4];
+	uint8_t volatile RESERVED22[0x48-0x40];
 
 	/* 0x48: SDIO FIFO counter register */
 	uint32_t volatile FIFOCNT;
 #define SDIO_FIFOCNT_FIFOCOUNT(x)		(1u << 0)
 
 	/* 0x4C */
-	uint32_t volatile RESERVED23[(0x80-0x4C)/4];
+	uint8_t volatile RESERVED23[0x80-0x4C];
 
 	/* 0x80: SDIO data FIFO register */
 	uint32_t volatile FIFO;

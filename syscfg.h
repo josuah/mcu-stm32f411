@@ -19,7 +19,7 @@ struct zmcu_syscfg {
 #define SYSCFG_EXTICR[4]_EXTIx(x)		(1u << 0)
 
 	/* 0x18 */
-	uint32_t volatile RESERVED8[(0x20-0x18)/4];
+	uint8_t volatile RESERVED8[0x20-0x18];
 
 	/* 0x20: Compensation cell control register */
 	uint32_t volatile CMPCR;

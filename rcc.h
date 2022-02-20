@@ -83,7 +83,7 @@ struct zmcu_rcc {
 #define RCC_AHB2RSTR_OTGFSRST			(1u << 7)
 
 	/* 0x18 */
-	uint32_t volatile RESERVED0[(0x20-0x18)/4];
+	uint8_t volatile RESERVED0[0x20-0x18];
 
 	/* 0x20: RCC APB1 peripheral reset register for */
 	uint32_t volatile APB1RSTR;
@@ -116,7 +116,7 @@ struct zmcu_rcc {
 #define RCC_APB2RSTR_TIM1RST			(1u << 0)
 
 	/* 0x28 */
-	uint32_t volatile RESERVED1[(0x30-0x28)/4];
+	uint8_t volatile RESERVED1[0x30-0x28];
 
 	/* 0x30: RCC AHB1 peripheral clock enable register */
 	uint32_t volatile AHB1ENR;
@@ -135,7 +135,7 @@ struct zmcu_rcc {
 #define RCC_AHB2ENR_OTGFSEN			(1u << 7)
 
 	/* 0x38 */
-	uint32_t volatile RESERVED2[(0x40-0x38)/4];
+	uint8_t volatile RESERVED2[0x40-0x38];
 
 	/* 0x40: RCC APB1 peripheral clock enable register */
 	uint32_t volatile APB1ENR;
@@ -168,7 +168,7 @@ struct zmcu_rcc {
 #define RCC_APB2ENR_TIM1EN			(1u << 0)
 
 	/* 0x48 */
-	uint32_t volatile RESERVED3[(0x50-0x48)/4];
+	uint8_t volatile RESERVED3[0x50-0x48];
 
 	/* 0x50: RCC AHB1 peripheral clock enable in low power mode register */
 	uint32_t volatile AHB1LPENR;
@@ -189,7 +189,7 @@ struct zmcu_rcc {
 #define RCC_AHB2LPENR_OTGFSLPEN			(1u << 7)
 
 	/* 0x58 */
-	uint32_t volatile RESERVED4[(0x60-0x58)/4];
+	uint8_t volatile RESERVED4[0x60-0x58];
 
 	/* 0x60: RCC APB1 peripheral clock enable in low power mode register */
 	uint32_t volatile APB1LPENR;
@@ -222,7 +222,7 @@ struct zmcu_rcc {
 #define RCC_APB2LPENR_TIM1LPEN			(1u << 0)
 
 	/* 0x68 */
-	uint32_t volatile RESERVED5[(0x70-0x68)/4];
+	uint8_t volatile RESERVED5[0x70-0x68];
 
 	/* 0x70: RCC Backup domain control register */
 	uint32_t volatile BDCR;
@@ -248,7 +248,7 @@ struct zmcu_rcc {
 #define RCC_CSR_LSION				(1u << 0)
 
 	/* 0x78 */
-	uint32_t volatile RESERVED6[(0x80-0x78)/4];
+	uint8_t volatile RESERVED6[0x80-0x78];
 
 	/* 0x80: RCC spread spectrum clock generation register */
 	uint32_t volatile SSCGR;
