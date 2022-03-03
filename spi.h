@@ -2,16 +2,16 @@
 #include <stdint.h>
 #include <binary.h>
 
-#define SPI1 ((struct zmcu_spi *)0x40013000)
-#define I2S1 ((struct zmcu_spi *)0x40013000)
-#define SPI2 ((struct zmcu_spi *)0x40003800)
-#define SPI3 ((struct zmcu_spi *)0x40003C00)
-#define SPI4 ((struct zmcu_spi *)0x40013400)
-#define I2S4 ((struct zmcu_spi *)0x40013400)
-#define SPI5 ((struct zmcu_spi *)0x40015000)
-#define I2S5 ((struct zmcu_spi *)0x40015000)
+#define SPI1 ((struct sdk_spi *)0x40013000)
+#define I2S1 ((struct sdk_spi *)0x40013000)
+#define SPI2 ((struct sdk_spi *)0x40003800)
+#define SPI3 ((struct sdk_spi *)0x40003C00)
+#define SPI4 ((struct sdk_spi *)0x40013400)
+#define I2S4 ((struct sdk_spi *)0x40013400)
+#define SPI5 ((struct sdk_spi *)0x40015000)
+#define I2S5 ((struct sdk_spi *)0x40015000)
 
-struct zmcu_spi {
+struct sdk_spi {
 	
 	/* 0x00: SPI control register 1 */
 	uint32_t volatile CR1;

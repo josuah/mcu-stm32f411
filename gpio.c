@@ -2,7 +2,7 @@
 #include <gpio.h>
 
 void
-gpio_enable(struct zmcu_gpio *gpio)
+gpio_enable(struct sdk_gpio *gpio)
 {
 	if (gpio == GPIOA)
 		RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
@@ -19,14 +19,14 @@ gpio_enable(struct zmcu_gpio *gpio)
 }
 
 void
-gpio_mode_output(struct zmcu_gpio *gpio, uint8_t pin, uint8_t speed)
+gpio_mode_output(struct sdk_gpio *gpio, uint8_t pin, uint8_t speed)
 {
 	gpio->OSPEEDR = GPIO_OSPEED(pin, speed);
 	gpio->MODER = GPIO_MODE(pin, GPIO_MODE_OUT);
 }
 
 void
-gpio_mode_altfn(struct zmcu_gpio *gpio, uint8_t pin, uint8_t altfn)
+gpio_mode_altfn(struct sdk_gpio *gpio, uint8_t pin, uint8_t altfn)
 {
 	uint32_t reg;
 
@@ -40,13 +40,13 @@ gpio_mode_altfn(struct zmcu_gpio *gpio, uint8_t pin, uint8_t altfn)
 }
 
 void
-gpio_port_set(struct zmcu_gpio *gpio, uint32_t mask)
+gpio_port_set(struct sdk_gpio *gpio, uint32_t mask)
 {
 	gpio->ODR |= mask;
 }
 
 void
-gpio_port_clear(struct zmcu_gpio *gpio, uint32_t mask)
+gpio_port_clear(struct sdk_gpio *gpio, uint32_t mask)
 {
 	gpio->ODR &= mask;
 }

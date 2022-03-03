@@ -2,9 +2,9 @@
 #include <stdint.h>
 #include <binary.h>
 
-#define CRC ((struct zmcu_crc *)0x40023000)
+#define CRC ((struct sdk_crc *)0x40023000)
  
-struct zmcu_crc {
+struct sdk_crc {
 
 	/* 0x00: Data register */
 	uint32_t volatile DR;

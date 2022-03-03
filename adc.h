@@ -2,9 +2,9 @@
 #include <stdint.h>
 #include <binary.h>
 
-#define ADC1 ((struct zmcu_adc *)0x40012000)
+#define ADC1 ((struct sdk_adc *)0x40012000)
 
-struct zmcu_adc {
+struct sdk_adc {
 
 	/* 0x00: ADC status register */
 	uint32_t volatile SR;

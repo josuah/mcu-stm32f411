@@ -2,16 +2,16 @@
 #include <stdint.h>
 #include <binary.h>
 
-#define TIM1 ((struct zmcu_tim *)0x40010000)
-#define TIM2 ((struct zmcu_tim *)0x40000000)
-#define TIM3 ((struct zmcu_tim *)0x40000400)
-#define TIM4 ((struct zmcu_tim *)0x40000800)
-#define TIM5 ((struct zmcu_tim *)0x40000C00)
-#define TIM9 ((struct zmcu_tim *)0x40014000)
-#define TIM10 ((struct zmcu_tim *)0x40014400)
-#define TIM11 ((struct zmcu_tim *)0x40014800)
+#define TIM1 ((struct sdk_tim *)0x40010000)
+#define TIM2 ((struct sdk_tim *)0x40000000)
+#define TIM3 ((struct sdk_tim *)0x40000400)
+#define TIM4 ((struct sdk_tim *)0x40000800)
+#define TIM5 ((struct sdk_tim *)0x40000C00)
+#define TIM9 ((struct sdk_tim *)0x40014000)
+#define TIM10 ((struct sdk_tim *)0x40014400)
+#define TIM11 ((struct sdk_tim *)0x40014800)
 
-struct zmcu_tim {
+struct sdk_tim {
 
 	/* 0x00: TIMx control register 1 */
 	uint32_t volatile CR1;

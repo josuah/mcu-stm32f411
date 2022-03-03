@@ -2,9 +2,9 @@
 #include <stdint.h>
 #include <binary.h>
 
-#define WWDG ((struct zmcu_wwdg *)0x40002C00)
+#define WWDG ((struct sdk_wwdg *)0x40002C00)
 
-struct zmcu_wwdg {
+struct sdk_wwdg {
 
 	/* 0x00: Control register */
 	uint32_t volatile CR;

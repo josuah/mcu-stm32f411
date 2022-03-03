@@ -2,9 +2,9 @@
 #include <stdint.h>
 #include <binary.h>
 
-#define RTC ((struct zmcu_rtc *)0x40002800)
+#define RTC ((struct sdk_rtc *)0x40002800)
 
-struct zmcu_rtc {
+struct sdk_rtc {
 	
 	/* 0x00: RTC time register */
 	uint32_t volatile TR;

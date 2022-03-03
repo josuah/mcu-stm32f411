@@ -2,9 +2,9 @@
 #include <stdint.h>
 #include <binary.h>
 
-#define FLASH ((struct zmcu_flash *)0x40023C00)
+#define FLASH ((struct sdk_flash *)0x40023C00)
 
-struct zmcu_flash {
+struct sdk_flash {
 	
 	/* 0x00: Flash access control register */
 	uint32_t volatile ACR;

@@ -2,9 +2,9 @@
 #include <stdint.h>
 #include <binary.h>
 
-#define SDIO ((struct zmcu_sdio *)0x40012C00)
+#define SDIO ((struct sdk_sdio *)0x40012C00)
 
-struct zmcu_sdio {
+struct sdk_sdio {
 	
 	/* 0x00: SDIO power control register */
 	uint32_t volatile POWER;

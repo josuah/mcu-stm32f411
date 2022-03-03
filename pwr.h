@@ -2,9 +2,9 @@
 #include <stdint.h>
 #include <binary.h>
 
-#define PWR ((struct zmcu_pwr *)0x40007000)
+#define PWR ((struct sdk_pwr *)0x40007000)
 
-struct zmcu_pwr {
+struct sdk_pwr {
 	
 	/* 0x00: PWR power control register */
 	uint32_t volatile CR;

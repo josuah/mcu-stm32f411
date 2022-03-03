@@ -2,9 +2,9 @@
 #include <stdint.h>
 #include <binary.h>
 
-#define SYSCFG ((struct zmcu_syscfg *)0x40013800)
+#define SYSCFG ((struct sdk_syscfg *)0x40013800)
 
-struct zmcu_syscfg {
+struct sdk_syscfg {
 	
 	/* 0x00: SYSCFG memory remap register */
 	uint32_t volatile MEMRMP;

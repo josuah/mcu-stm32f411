@@ -2,10 +2,10 @@
 #include <stdint.h>
 #include <binary.h>
 
-#define DMA1 ((struct zmcu_dma *)0x40026000)
-#define DMA2 ((struct zmcu_dma *)0x40026400)
+#define DMA1 ((struct sdk_dma *)0x40026000)
+#define DMA2 ((struct sdk_dma *)0x40026400)
 
-struct zmcu_dma {
+struct sdk_dma {
 	
 	/* 0x00: DMA low interrupt status register */
 	uint32_t volatile LISR;

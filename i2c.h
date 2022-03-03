@@ -2,13 +2,13 @@
 #include <stdint.h>
 #include <binary.h>
 
-#define I2C1 ((struct zmcu_i2c *)0x40005400)
-#define I2C2 ((struct zmcu_i2c *)0x40005800)
-#define I2C3 ((struct zmcu_i2c *)0x40005C00)
-#define I2S2 ((struct zmcu_i2c *)0x40003400)
-#define I2S3 ((struct zmcu_i2c *)0x40004000)
+#define I2C1 ((struct sdk_i2c *)0x40005400)
+#define I2C2 ((struct sdk_i2c *)0x40005800)
+#define I2C3 ((struct sdk_i2c *)0x40005C00)
+#define I2S2 ((struct sdk_i2c *)0x40003400)
+#define I2S3 ((struct sdk_i2c *)0x40004000)
 
-struct zmcu_i2c {
+struct sdk_i2c {
 	
 	/* 0x00: I2C Control register 1 */
 	uint32_t volatile CR1;

@@ -2,11 +2,11 @@
 #include <stdint.h>
 #include <binary.h>
 
-#define USART1 ((struct zmcu_usart *)0x40011000)
-#define USART2 ((struct zmcu_usart *)0x40004400)
-#define USART6 ((struct zmcu_usart *)0x40011400)
+#define USART1 ((struct sdk_usart *)0x40011000)
+#define USART2 ((struct sdk_usart *)0x40004400)
+#define USART6 ((struct sdk_usart *)0x40011400)
 
-struct zmcu_usart {
+struct sdk_usart {
 	
 	/* 0x00: Status register */
 	uint32_t volatile SR;

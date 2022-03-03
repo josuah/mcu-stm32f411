@@ -2,9 +2,9 @@
 #include <stdint.h>
 #include <binary.h>
 
-#define EXTI ((struct zmcu_exti *)0x40013C00)
+#define EXTI ((struct sdk_exti *)0x40013C00)
 
-struct zmcu_exti {
+struct sdk_exti {
 	
 	/* 0x00: Interrupt mask register */
 	uint32_t volatile IMR;

@@ -2,9 +2,9 @@
 #include <stdint.h>
 #include <binary.h>
 
-#define IWDG ((struct zmcu_iwdg *)0x40003000)
+#define IWDG ((struct sdk_iwdg *)0x40003000)
 
-struct zmcu_iwdg {
+struct sdk_iwdg {
 	
 	/* 0x00: Key register */
 	uint32_t volatile KR;
