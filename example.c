@@ -1,11 +1,13 @@
-#include "gpio.h"
+#include "libc.h"
+#include "registers.h"
+#include "functions.h"
 
 int
 main(void)
 {
 	gpio_enable(GPIOC);
-	gpio_mode_output(GPIOC, 13, GPIO_OSPEED_MEDIUM);
-	for (;;) gpio_port_set(GPIOB, 1u << 13);
+	GPIOC->MODER = (GPIOC->MODER & ~GPIO_MODER_MODER_Msk(13)) | GPIO_MODER_MODER_OUTPUT(13);
 
+	for (;;) GPIOC->ODR &= ~(1 << 13);
 	return 0;
 }

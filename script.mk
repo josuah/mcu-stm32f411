@@ -7,7 +7,7 @@ LD = arm-none-eabi-ld
 AR = arm-none-eabi-ar
 GDB = arm-none-eabi-gdb
 OPENOCD = openocd -f interface/stlink.cfg -f target/stm32f4x.cfg
-SDK_OBJ = ${SDK}/init.o ${SDK}/gpio.o
+SDK_OBJ = ${SDK}/libc.o ${SDK}/init.o
 SDK_CFLAGS = -ffunction-sections -fdata-sections
 SDK_LDFLAGS = -Map=firmware.map --gc-sections -T${SDK}/script.ld -nostdlib -static
 SDK_CPPFLAGS = -I${SDK}

@@ -1,76 +1,108 @@
-#include <main.h>
+#include "libc.h"
+#include "registers.h"
+#include "functions.h"
 
 extern int main(void);
-extern void __reset_handler(void);
-
 extern char __data_start, __data_end, __data_load_start;
 extern char __bss_start, __bss_end, __stack_top;
-
-void *__stack_pointer = &__stack_top;	/* 0x00 */
-
-void (*__vectors[])(void) = {
-	&__reset_handler,		/* 0x04 -15 ARM Reset */
-	&__stop_program,		/* 0x08 -14 ARM NonMaskableInt */
-	&__stop_program,		/* 0x0C -13 ARM HardFault */
-	&__stop_program,		/* 0x10 -12 ARM MemoryManagement */
-	&__stop_program,		/* 0x14 -11 ARM BusFault */
-	&__stop_program,		/* 0x18 -10 ARM UsageFault */
-	&__stop_program,		/* 0x1C -9 ARM SecureFault */
-	&__stop_program,		/* 0x20 -8 Reserved */
-	&__stop_program,		/* 0x24 -7 Reserved */
-	&__stop_program,		/* 0x28 -6 Reserved */
-	&__stop_program,		/* 0x2C -5 ARM SVCall */
-	&__stop_program,		/* 0x30 -4 ARM DebugMonitor */
-	&__stop_program,		/* 0x34 -2 ARM PendSV */
-	&__stop_program,		/* 0x38 -1 ARM SysTick */
-	&__stop_program,		/* 0x3C #0 PM */
-	&__stop_program,		/* 0x40 #1 SYSCTRL */
-	&__stop_program,		/* 0x44 #2 WDT */
-	&__stop_program,		/* 0x48 #3 RTC */
-	&__stop_program,		/* 0x4C #4 EIC */
-	&__stop_program,		/* 0x50 #5 NVMCTRL */
-	&__stop_program,		/* 0x54 #6 DMAC */
-	&__stop_program,		/* 0x58 #7 USB */
-	&__stop_program,		/* 0x5C #8 EVSYS */
-	&__stop_program,		/* 0x60 #9 SERCOM0 */
-	&__stop_program,		/* 0x64 #10 SERCOM1 */
-	&__stop_program,		/* 0x68 #11 SERCOM2 */
-	&__stop_program,		/* 0x6C #12 SERCOM3 */
-	&__stop_program,		/* 0x70 #13 SERCOM4 */
-	&__stop_program,		/* 0x74 #14 SERCOM5 */
-	&__stop_program,		/* 0x78 #15 TCC0 */
-	&__stop_program,		/* 0x7C #16 TCC1 */
-	&__stop_program,		/* 0x80 #17 TCC2 */
-	&__stop_program,		/* 0x84 #18 TC3 */
-	&__stop_program,		/* 0x88 #19 TC4 */
-	&__stop_program,		/* 0x8C #20 TC5 */
-	&__stop_program,		/* 0x90 #21 TC6 */
-	&__stop_program,		/* 0x94 #22 TC7 */
-	&__stop_program,		/* 0x98 #23 ADC */
-	&__stop_program,		/* 0x9C #24 AC */
-	&__stop_program,		/* 0xA0 #25 DAC */
-	&__stop_program,		/* 0xA4 #26 PTC */
-	&__stop_program,		/* 0xA8 #27 I2S */
-	&__stop_program,		/* 0xAC #28 AC1 */
-	&__stop_program,		/* 0xB0 #29 TCC3 */
-};
 
 void
 __reset_handler(void)
 {
-	volatile char *src, *dst;
+	volatile char *dst, *src = &__data_load_start;
 
-	/* fill initialised and uninitialised variables */
-	src = &__data_load_start;
 	for (dst = &__data_start; dst < &__data_end; *dst++ = *src++);
 	for (dst = &__bss_start; dst < &__bss_end; *dst++ = 0);
-
 	main();
-	__stop_program();
-}
-
-void
-__stop_program(void)
-{
 	for (int volatile i = 0 ;; i++);
 }
+
+/* so that the debugger can immediately see which fault was triggered */
+void __null_handler(void)		{ for (int volatile i = 0;; i++); }
+void __isr_hard_fault(void)		{ for (int volatile i = 0;; i++); }
+void __isr_memory_management(void)	{ for (int volatile i = 0;; i++); }
+void __isr_non_maskable_interrupt(void)	{ for (int volatile i = 0;; i++); }
+void __isr_bus_fault(void)		{ for (int volatile i = 0;; i++); }
+void __isr_usage_fault(void)		{ for (int volatile i = 0;; i++); }
+void __isr_secure_fault(void)		{ for (int volatile i = 0;; i++); }
+
+void *__stack_pointer = &__stack_top;	/* 0x000 */
+
+void (*__vectors[])(void) = {
+	&__reset_handler,		/* 0x004 -15 ARM Reset */
+	&__isr_non_maskable_interrupt,	/* 0x008 -14 ARM NonMaskableInt */
+	&__isr_hard_fault,		/* 0x00C -13 ARM HardFault */
+	&__isr_memory_management,	/* 0x010 -12 ARM MemoryManagement */
+	&__isr_bus_fault,		/* 0x014 -11 ARM BusFault */
+	&__isr_usage_fault,		/* 0x018 -10 ARM UsageFault */
+	&__isr_secure_fault,		/* 0x01C -9 ARM SecureFault */
+	&__null_handler,		/* 0x020 -8 Reserved */
+	&__null_handler,		/* 0x024 -7 Reserved */
+	&__null_handler,		/* 0x028 -6 Reserved */
+	&__null_handler,		/* 0x02C -5 ARM SVCall */
+	&__null_handler,		/* 0x030 -4 ARM DebugMonitor */
+	&__null_handler,		/* 0x034 -3 Reserved */
+	&__null_handler,		/* 0x038 -2 ARM PendSV */
+	&__null_handler,		/* 0x03C -1 ARM SysTick */
+	&__null_handler,		/* 0x040 #0 WWDG */
+	&__null_handler,		/* 0x044 #1 EXTI16_PVD */
+	&__null_handler,		/* 0x048 #2 EXTI21_TAMP_STAMP */
+	&__null_handler,		/* 0x04C #3 EXTI22_RTC_WKUP */
+	&__null_handler,		/* 0x050 #4 FLASH */
+	&__null_handler,		/* 0x054 #5 RCC */
+	&__null_handler,		/* 0x058 #6 EXTI0 */
+	&__null_handler,		/* 0x05C #7 EXTI1 */
+	&__null_handler,		/* 0x060 #8 EXTI2 */
+	&__null_handler,		/* 0x064 #9 EXTI3 */
+	&__null_handler,		/* 0x068 #10 EXTI4 */
+	&__null_handler,		/* 0x06C #11 DMA1_STREAM0 */
+	&__null_handler,		/* 0x070 #12 DMA1_STREAM1 */
+	&__null_handler,		/* 0x074 #13 DMA1_STREAM2 */
+	&__null_handler,		/* 0x078 #14 DMA1_STREAM3 */
+	&__null_handler,		/* 0x07C #15 DMA1_STREAM4 */
+	&__null_handler,		/* 0x080 #16 DMA1_STREAM5 */
+	&__null_handler,		/* 0x084 #17 DMA1_STREAM6 */
+	&__null_handler,		/* 0x088 #18 ADC */
+	&__null_handler,		/* 0x08C #19 Reserved */
+	&__null_handler,		/* 0x090 #20 Reserved */
+	&__null_handler,		/* 0x094 #21 Reserved */
+	&__null_handler,		/* 0x098 #22 Reserved */
+	&__null_handler,		/* 0x09C #23 EXTI9TO5 */
+	&__null_handler,		/* 0x0A0 #24 TIM1_BRK_TIM9 */
+	&__null_handler,		/* 0x0A4 #25 TIM1_UP_TIM10 */
+	&__null_handler,		/* 0x0A8 #26 TIM1_TRG_COM_TIM1 */
+	&__null_handler,		/* 0x0AC #27 TIM1_CC */
+	&__null_handler,		/* 0x0B0 #28 TIM2 */
+	&__null_handler,		/* 0x0B4 #29 TIM3 */
+	&__null_handler,		/* 0x0B8 #30 TIM4 */
+	&__null_handler,		/* 0x0BC #31 I2C1_EV */
+	&__null_handler,		/* 0x0C0 #32 I2C1_ER */
+	&__null_handler,		/* 0x0C4 #33 I2C2_EV */
+	&__null_handler,		/* 0x0C8 #34 I2C2_ER */
+	&__null_handler,		/* 0x0CC #35 SPI1 */
+	&__null_handler,		/* 0x0D0 #36 SPI2 */
+	&__null_handler,		/* 0x0D4 #37 USART1 */
+	&__null_handler,		/* 0x0D8 #38 USART2 */
+	&__null_handler,		/* 0x0DC #39 EXTI15TO10 */
+	&__null_handler,		/* 0x0E0 #40 EXTI17_RTC_ALARM */
+	&__null_handler,		/* 0x0E4 #41 EXTI18_OTG_FS_WKUP */
+	&__null_handler,		/* 0x0E8 #42 DMA1_STREAM7 */
+	&__null_handler,		/* 0x0EC #43 SDIO */
+	&__null_handler,		/* 0x0F0 #44 TIM5 */
+	&__null_handler,		/* 0x0F4 #45 SPI3 */
+	&__null_handler,		/* 0x0F8 #46 DMA2_STREAM0 */
+	&__null_handler,		/* 0x0FC #47 DMA2_STREAM1 */
+	&__null_handler,		/* 0x100 #48 DMA2_STREAM2 */
+	&__null_handler,		/* 0x104 #49 DMA2_STREAM3 */
+	&__null_handler,		/* 0x108 #50 DMA2_STREAM4 */
+	&__null_handler,		/* 0x10C #51 OTG_FS */
+	&__null_handler,		/* 0x110 #52 DMA2_STREAM5 */
+	&__null_handler,		/* 0x114 #53 DMA2_STREAM6 */
+	&__null_handler,		/* 0x118 #54 DMA2_STREAM7 */
+	&__null_handler,		/* 0x11C #55 USART6 */
+	&__null_handler,		/* 0x120 #56 I2C3_EV */
+	&__null_handler,		/* 0x124 #57 I2C3_ER */
+	&__null_handler,		/* 0x128 #58 FPU */
+	&__null_handler,		/* 0x12C #59 SPI4 */
+	&__null_handler,		/* 0x130 #60 SPI5 */
+};
