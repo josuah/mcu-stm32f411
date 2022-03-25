@@ -17,6 +17,24 @@ __reset_handler(void)
 	for (int volatile i = 0 ;; i++);
 }
 
+void
+__isr_usart1(void)
+{
+	usart_interrupt(USART1);
+}
+
+void
+__isr_usart2(void)
+{
+	usart_interrupt(USART2);
+}
+
+void
+__isr_usart6(void)
+{
+	usart_interrupt(USART6);
+}
+
 /* so that the debugger can immediately see which fault was triggered */
 void __null_handler(void)		{ for (int volatile i = 0;; i++); }
 void __isr_hard_fault(void)		{ for (int volatile i = 0;; i++); }
@@ -81,8 +99,8 @@ void (*__vectors[])(void) = {
 	&__null_handler,		/* 0x0C8 #34 I2C2_ER */
 	&__null_handler,		/* 0x0CC #35 SPI1 */
 	&__null_handler,		/* 0x0D0 #36 SPI2 */
-	&__null_handler,		/* 0x0D4 #37 USART1 */
-	&__null_handler,		/* 0x0D8 #38 USART2 */
+	&__isr_usart1,			/* 0x0D4 #37 USART1 */
+	&__isr_usart2,			/* 0x0D8 #38 USART2 */
 	&__null_handler,		/* 0x0DC #39 EXTI15TO10 */
 	&__null_handler,		/* 0x0E0 #40 EXTI17_RTC_ALARM */
 	&__null_handler,		/* 0x0E4 #41 EXTI18_OTG_FS_WKUP */
@@ -99,7 +117,7 @@ void (*__vectors[])(void) = {
 	&__null_handler,		/* 0x110 #52 DMA2_STREAM5 */
 	&__null_handler,		/* 0x114 #53 DMA2_STREAM6 */
 	&__null_handler,		/* 0x118 #54 DMA2_STREAM7 */
-	&__null_handler,		/* 0x11C #55 USART6 */
+	&__isr_usart6,			/* 0x11C #55 USART6 */
 	&__null_handler,		/* 0x120 #56 I2C3_EV */
 	&__null_handler,		/* 0x124 #57 I2C3_ER */
 	&__null_handler,		/* 0x128 #58 FPU */

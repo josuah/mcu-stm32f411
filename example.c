@@ -8,6 +8,6 @@ main(void)
 	gpio_enable(GPIOC);
 	GPIOC->MODER = (GPIOC->MODER & ~GPIO_MODER_MODER_Msk(13)) | GPIO_MODER_MODER_OUTPUT(13);
 
-	for (;;) GPIOC->ODR &= ~(1 << 13);
+	usart_init(USART1, 9600, PINOUT_);
 	return 0;
 }
